@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import sys
+import os
+
+def sum_metadata():
+	global meta_inf
+	num_chnodes = meta_inf.pop(0)
+	num_metadata = meta_inf.pop(0)
+
+#	print('1:', num_chnodes, num_metadata, meta_inf)
+
+	sum_nodes_meta = 0
+	while (num_chnodes>0):
+		sum_nodes_meta += sum_metadata()
+		num_chnodes -= 1
+#	print('2:', num_chnodes, num_metadata, meta_inf)
+
+	while (num_metadata>0):
+		sum_nodes_meta += meta_inf.pop(0)
+		num_metadata -= 1
+#	print('3:', num_chnodes, num_metadata, meta_inf)
+	
+	return sum_nodes_meta
+
+meta_inf = []
+
+with open('8.txt') as f:
+    for line in f:
+		line = int(line.strip())
+		meta_inf.append(line)
+
+sum_meta = 0
+while len(meta_inf)>0:
+	sum_meta += sum_metadata()
+	print ('MAIN:', meta_inf, sum_meta)
+
+print(meta_inf, sum_meta)
